@@ -4,6 +4,7 @@ from PIL import Image, ImageTk
 import os
 from datetime import datetime
 from admin_panel import create_admin_panel
+import f_main
 
 def create_hover_effect(button):
     def on_enter(e):
@@ -86,8 +87,11 @@ def main():
     buttons_frame = tk.Frame(left_frame, bg="#F5E6E0")
     buttons_frame.pack(anchor=tk.W, pady=(40, 0))
     
+    def read_img():
+        return_value = f_main.cam_read()
+        print(return_value)
     # Create all three buttons with equal styling
-    mark_attendance_btn = create_button(buttons_frame, "Mark Attendance", "#E88D72")
+    mark_attendance_btn = create_button(buttons_frame, "Mark Attendance", "#E88D72", lambda:read_img() )
     mark_attendance_btn.pack(anchor=tk.W, pady=(0, 20))
     
     admin_btn = create_button(buttons_frame, "Admin", "#2B2B2B", lambda: create_admin_panel(root))

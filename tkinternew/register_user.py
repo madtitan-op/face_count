@@ -1,13 +1,18 @@
 import tkinter as tk
 from tkinter import ttk, messagebox, filedialog
 import os
+import sys
 import re  # For email validation
 from datetime import datetime
 import requests  # Add this import for HTTP requests
 from login import get_token  # Assuming you have a function to get the token
 from Face import Face
 import shutil
-from ..face_encode import encodings
+
+from face_encode import encodings
+
+
+# from face_data.face_encode import encodings
 
 class ModernEntry(tk.Frame):
     def __init__(self, parent, placeholder="", show=None):
@@ -447,7 +452,8 @@ def create_register_window(parent):
             
             # Send data to server
             server_success, server_message = send_user_data_to_server(user_data, photo_path[0])
-            encodings.face_encode(photo_path[0], user_data['name'], user_data['userid'])
+            encodings.face_encoding(photo_path[0], user_data['name'], user_data['userid'])
+            # Face.encode(photo_path[0], user_data['name'], user_data['userid'])
             
             if server_success:
                 messagebox.showinfo("Success", "Account created successfully!")
@@ -462,7 +468,7 @@ def create_register_window(parent):
 
     # Submit button with modern style
     submit_btn = tk.Button(form_frame,
-                          text="GET STARTED",
+                          text="SUBMIT",
                           font=("Helvetica", 12, "bold"),
                           bg="#4CAF50",
                           fg="white",
